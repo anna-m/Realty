@@ -1,0 +1,24 @@
+<h2><%= @offer.new_record? ? "Добавление нового" : "Редактирование" %> предложения</h2>
+<hr>
+<% if @offer.errors.any? %>
+  <div id="errors" class="alert">
+    <p>Произошли ошибки при <%= @offer.new_record? ? "добавлении" : "редактировании" %> предложения.</p>
+    <ul>
+      <% @offer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<% form_for @offer do |form| %>
+  <%= form.label :kind %>
+  <%= form.select :kind, t(:offers) %>
+  <%= form.label :description %>
+  <%= form.text_area :description, :size => '40x5' %>
+  <% [:rooms, :square, :price, :metro, :parking].each do |attribute| %>
+    <%= form.label attribute %>
+    <%= form.text_field attribute %>
+  <% end %>
+  <%= submit_tag "#{ @offer.new_record? ? "Добавить" : "Отредактировать" } предложение" %>
+<% end %>
+<p><%= link_to "Назад", :back %></p>

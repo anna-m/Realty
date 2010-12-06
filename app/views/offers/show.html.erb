@@ -1,0 +1,9 @@
+<h1><%= @offer.kind %></h1>
+<hr>
+<p>Общее описание: <%= @offer.description %></p>
+<p>Количество комнат: <%= @offer.rooms %></p>
+<p>Площадь: <%= @offer.square %> кв. метров</p>
+<p>Ближайшее метро: <%= @offer.metro %></p>
+<p>Наличие парковки: <%= @offer.parking %></p>
+<p>Цена: <%= @offer.price %> рублей</p>
+<p><%= link_to "Назад", :back %></p>

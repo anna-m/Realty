@@ -1,0 +1,29 @@
+<h2><%= @user.new_record? ? "Регистрация на сайте" : "Редактирование профиля" %></h2>
+<hr>
+<% if @user.errors.any? %>
+  <div id="errors" class="alert">
+    <p>Произошли ошибки при <%= @user.new_record? ? "регистрации" : "редактировании профиля" %>.</p>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<% form_for @user do |form| %>
+  <%= form.label :email %>
+  <%= form.text_field :email %>
+  <% if @user.new_record? %>
+    <div class="comment">Будет использоваться в качестве идентификатора для входа на сайт.</div>
+  <% end %>
+  <%= form.label :password %>
+  <%= form.password_field :password %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :card %>
+  <%= form.text_field :card %>
+  <% if @user.card.blank? %>
+    <div class="comment">Заполнив это поле, Вы станете привелигированным пользователем и сможете просматривать неограниченное количество объявлений на сайте.</div>
+  <% end %>
+  <%= submit_tag @user.new_record? ? "Зарегистрироваться" : "Отредактировать профиль" %>
+<% end %>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Поиск и просмотр объявлений о купле-продаже и аренде недвижимости</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :all %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <header><%= link_to "Поиск и просмотр объявлений о купле-продаже и аренде недвижимости", root_url %></header>
+  <section id="top">
+    <nav>
+      <% if logged_in? %>
+        Приветствуем, <%= @current_user.name %>! &nbsp;
+        <%= link_to "Профиль", edit_user_url(@current_user) %> |
+        <%= link_to "Выйти", session_url, :method => :delete %>
+      <% else %>
+        <%= link_to "Войти", new_session_url %> |
+        <%= link_to "Зарегистрироваться", new_user_url %>
+      <% end %>
+    </nav>
+    <p>
+      Предложений на сайте: <%= @offers_count %>, пользователей зарегистрировано: <%= @users_count %><% if logged_in? %>, осталось просмотров: <%= @current_user.privileged? ? "неограниченно" : @current_user.counter %><% end %>
+    </p>
+  </section>
+  <section id="main">
+    <% [ :notice, :alert ].each do |message| %>
+      <% if flash[message].present? %>
+        <div id="message" class="<%= message %>"><%= flash[message] %></div>
+      <% end %>
+    <% end %>
+    <%= yield %>
+  </section>
+  <footer>&copy; <%= Time.now.year %></footer>
+</body>
+</html>

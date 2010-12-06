@@ -1,0 +1,10 @@
+<h2>Список предложений</h2>
+<hr>
+<% if @offers.any? %>
+  <%= render @offers %>
+<% else %>
+  <p>К сожалению, пока нет ни одного предложения.</p>
+<% end %>
+<% if @current_user.admin? %>
+  <p><%= link_to "Добавить предложение", new_offer_url %></p>
+<% end %>

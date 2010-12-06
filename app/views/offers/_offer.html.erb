@@ -1,0 +1,8 @@
+<div class="offer">
+  <%= offer.kind %>, площадь: <%= offer.square %> кв. меторв.
+  <% if @current_user.admin? %>
+    <%= link_to "Удалить", offer, :method => :delete, :confirm => "Действительно удалить это предложение?" %>
+    <%= link_to "Редактировать", edit_offer_url(offer) %>
+  <% end %>
+  <%= link_to "Подробнее", offer %>
+</div>
